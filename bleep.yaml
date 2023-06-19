@@ -1,0 +1,56 @@
+$schema: https://raw.githubusercontent.com/oyvindberg/bleep/master/schema.json
+$version: 0.0.2
+jvm:
+  name: graalvm-java17:22.3.1
+projects:
+  reproduce-anyval-cce:
+    extends: template-cross-all
+    platform:
+      mainClass: test.Test
+templates:
+  template-common:
+    scala:
+      options: -encoding utf8 -feature -unchecked
+      strict: true
+    source-layout: cross-full
+  template-cross-all:
+    cross:
+      js213:
+        extends: template-scala-2.13-js
+      js3:
+        extends: template-scala-3-js
+      jvm213:
+        extends: template-scala-2.13-jvm
+      jvm3:
+        extends: template-scala-3-jvm
+    extends: template-common
+  template-js:
+    platform:
+      jsNodeVersion: 18.4.0
+      jsVersion: 1.13.1
+      name: js
+  template-jvm:
+    platform:
+      name: jvm
+  template-scala-2:
+    scala:
+      version: 2.13.11
+  template-scala-2.13-js:
+    extends:
+    - template-js
+    - template-scala-2
+  template-scala-2.13-jvm:
+    extends:
+    - template-jvm
+    - template-scala-2
+  template-scala-3:
+    scala:
+      version: 3.3.0
+  template-scala-3-js:
+    extends:
+    - template-js
+    - template-scala-3
+  template-scala-3-jvm:
+    extends:
+    - template-jvm
+    - template-scala-3
