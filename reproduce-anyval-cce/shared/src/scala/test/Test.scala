@@ -15,13 +15,13 @@ trait Concrete extends Abstract[Outer] {
     new Outer(new Inner())
 }
 
-trait PublicReimplementation extends Concrete {
-  override def method(): Outer =
+trait Public extends Concrete {
+  def method2(): Outer =
     super.method()
 }
 
 object Test extends App {
-  private object instance extends PublicReimplementation
+  private object instance extends Public
 
-  instance.method()
+  instance.method2()
 }
